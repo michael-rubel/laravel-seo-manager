@@ -8,7 +8,7 @@
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/michael-rubel/laravel-seo-manager/run-tests/main?style=flat-square&label=tests&logo=github)](https://github.com/michael-rubel/laravel-seo-manager/actions)
 [![PHPStan](https://img.shields.io/github/workflow/status/michael-rubel/laravel-seo-manager/phpstan/main?style=flat-square&label=larastan&logo=laravel)](https://github.com/michael-rubel/laravel-seo-manager/actions)
 
-This package provides core functionality to build SEO management panels.
+This package provides simple functionality to manage SEO tags in your Laravel application. It has basic `seo_tags` table with `url` and `tags` columns where you can put the exact URL of your app and JSON array of parameters you want to receive in the view under the defined URL. You can define wildcard URL using `*` notation as well to cover full URL parts. You will receive the manager variable in each view. The model to use by the package and variable name is customizable in the config file.
 
 The package requires PHP `^8.x` and Laravel `^8.67`.
 
@@ -22,14 +22,22 @@ Install the package using composer:
 composer require michael-rubel/laravel-seo-manager
 ```
 
-## Usage
-```php
-//
+Publish the migration:
+```bash
+php artisan vendor:publish --tag="seo-manager-migrations"
 ```
 
+Publish the config file:
 ```bash
 php artisan vendor:publish --tag="seo-manager-config"
 ```
+
+## Usage
+After publishing the config and running migrations, you can apply URLs in the `seo_tags` table using following patterns:
+- `/test-url/my-target`
+- `/test-url/any-target/*`
+
+Wildcard `*` has a lower priority than basic define.
 
 ## Testing
 ```bash

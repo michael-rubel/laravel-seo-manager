@@ -1,4 +1,4 @@
-![Laravel SEO Manager](https://user-images.githubusercontent.com/37669560/147101154-e70d8648-ffa3-48c6-b9a8-6a072b7c1f00.png)
+![Laravel SEO Manager](https://user-images.githubusercontent.com/37669560/147985811-a4cfb0f5-6486-49eb-b2b5-8ec9262d23a7.png)
 
 # Laravel SEO Manager
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/michael-rubel/laravel-seo-manager.svg?style=flat-square&logo=packagist)](https://packagist.org/packages/michael-rubel/laravel-seo-manager)

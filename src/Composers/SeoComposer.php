@@ -2,6 +2,8 @@
 
 namespace MichaelRubel\SeoManager\Composers;
 
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -63,16 +65,17 @@ class SeoComposer
                 : SeoTag::class
         );
 
-        // @phpstan-ignore-next-line
         if (! $model instanceof SeoTagContract) {
             throw new ShouldImplementSeoTagInterfaceException();
         }
 
-        // @phpstan-ignore-next-line
-        return $model::where($model->getUrlColumnName(), $url)
-            ->orWhere($model->getUrlColumnName(), $wildcardUrl)
-            ->first()
-            ?->{$model->getTagsColumnName()};
+        $instance = $this->getInstance($model, $url);
+
+        if (! $instance->exists()) {
+            $instance = $this->getInstance($model, $wildcardUrl);
+        }
+
+        return $instance->first()?->{$model->getTagsColumnName()};
     }
 
     /**
@@ -88,5 +91,16 @@ class SeoComposer
         array_push($array, '*');
 
         return implode('/', $array);
+    }
+
+    /**
+     * @param SeoTagContract $model
+     * @param string         $url
+     *
+     * @return Builder
+     */
+    private function getInstance(SeoTagContract $model, string $url): Builder
+    {
+        return $model::where($model->getUrlColumnName(), $url);
     }
 }

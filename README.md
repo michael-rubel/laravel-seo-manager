@@ -39,6 +39,9 @@ After publishing the config and running migrations, you can apply URLs in the `s
 
 Wildcard `*` has a lower priority than basic define.
 
+## Roadmap
+- Add Livewire scaffolding.
+
 ## Testing
 ```bash
 composer test

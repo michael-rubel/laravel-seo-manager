@@ -60,10 +60,10 @@ class SeoComposer
                 : SeoTag::class
         );
 
-        return $model::where('url', $url)
-            ->orWhere('url', $wildcardUrl)
+        return $model::where($model->getUrlColumnName(), $url)
+            ->orWhere($model->getUrlColumnName(), $wildcardUrl)
             ->first()
-            ?->tags;
+            ?->{$model->getTagsColumnName()};
     }
 
     /**

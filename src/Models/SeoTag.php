@@ -25,4 +25,20 @@ class SeoTag extends Model
     protected $casts = [
         'tags' => AsCollection::class,
     ];
+
+    /**
+     * @return string
+     */
+    public function getUrlColumnName(): string
+    {
+        return 'url';
+    }
+
+    /**
+     * @return string
+     */
+    public function getTagsColumnName(): string
+    {
+        return 'tags';
+    }
 }

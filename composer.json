@@ -50,7 +50,7 @@
     "extra": {
         "laravel": {
             "providers": [
-              "SeoManagerServiceProvider"
+                "MichaelRubel\\SeoManager\\SeoManagerServiceProvider"
             ]
         }
     },

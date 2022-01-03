@@ -73,4 +73,15 @@ class SeoManagerTest extends TestCase
         $view = $this->view('seo-manager::test-view');
         $view->assertSee('TestTitle4');
     }
+
+    /** @test */
+    public function testCanOverrideVariableName()
+    {
+        config(['seo-manager.variable_name' => 'testVariable']);
+
+        $view = $this->view('seo-manager::test-view');
+
+        $view->assertSee('testVariable');
+        $view->assertSee('TestTitle');
+    }
 }

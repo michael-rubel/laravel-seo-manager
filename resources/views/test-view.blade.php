@@ -1,1 +1,3 @@
-{{ $seo_manager->get('title') }}
+{{ ${config('seo-manager.variable_name')}->get('title') }}
+<br>
+{{ config('seo-manager.variable_name') }}

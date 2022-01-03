@@ -30,7 +30,14 @@ class SeoComposer
      */
     public function compose(View $view): void
     {
-        $view->with('seo_manager', $this->seo_manager);
+        $variable = config('seo-manager.variable_name');
+
+        $view->with(
+            is_string($variable)
+                ? $variable
+                : 'seo_manager',
+            $this->seo_manager
+        );
     }
 
     /**

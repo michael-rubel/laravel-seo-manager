@@ -5,7 +5,9 @@ namespace MichaelRubel\SeoManager\Composers;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
+use MichaelRubel\SeoManager\Exceptions\ShouldImplementSeoTagInterfaceException;
 use MichaelRubel\SeoManager\Models\SeoTag;
+use MichaelRubel\SeoManager\Models\SeoTagContract;
 
 class SeoComposer
 {
@@ -42,6 +44,7 @@ class SeoComposer
 
     /**
      * @return Collection|null
+     * @throws ShouldImplementSeoTagInterfaceException
      */
     protected function getSeoTags(): ?Collection
     {
@@ -59,6 +62,10 @@ class SeoComposer
                 ? $configuredModel
                 : SeoTag::class
         );
+
+        if (! $model instanceof SeoTagContract) {
+            throw new ShouldImplementSeoTagInterfaceException();
+        }
 
         return $model::where($model->getUrlColumnName(), $url)
             ->orWhere($model->getUrlColumnName(), $wildcardUrl)

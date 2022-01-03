@@ -2,6 +2,9 @@
 
 namespace MichaelRubel\SeoManager\Tests;
 
+use MichaelRubel\SeoManager\Exceptions\ShouldImplementSeoTagInterfaceException;
+use MichaelRubel\SeoManager\Tests\Stubs\FakeModel;
+
 class SeoManagerTest extends TestCase
 {
     public function setUp(): void
@@ -83,5 +86,15 @@ class SeoManagerTest extends TestCase
 
         $view->assertSee('testVariable');
         $view->assertSee('TestTitle');
+    }
+
+    /** @test */
+    public function testThrowsShouldImplementInterface()
+    {
+        $this->expectException(ShouldImplementSeoTagInterfaceException::class);
+
+        config(['seo-manager.model' => FakeModel::class]);
+
+        $this->view('seo-manager::test-view');
     }
 }

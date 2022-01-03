@@ -63,10 +63,12 @@ class SeoComposer
                 : SeoTag::class
         );
 
+        // @phpstan-ignore-next-line
         if (! $model instanceof SeoTagContract) {
             throw new ShouldImplementSeoTagInterfaceException();
         }
 
+        // @phpstan-ignore-next-line
         return $model::where($model->getUrlColumnName(), $url)
             ->orWhere($model->getUrlColumnName(), $wildcardUrl)
             ->first()

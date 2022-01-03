@@ -6,6 +6,9 @@ parameters:
     paths:
         - src
 
+    ignoreErrors:
+        - '#Property MichaelRubel\\SeoManager\\Exceptions\\ShouldImplementSeoTagInterfaceException\:\:\$message has no type specified\.#'
+
     level: max
 
     checkMissingIterableValueType: false

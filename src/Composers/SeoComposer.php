@@ -2,7 +2,6 @@
 
 namespace MichaelRubel\SeoManager\Composers;
 
-use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 use MichaelRubel\SeoManager\Exceptions\ShouldImplementSeoTagInterfaceException;
@@ -12,14 +11,11 @@ use MichaelRubel\SeoManager\Models\SeoTagContract;
 class SeoComposer
 {
     /**
-     * @var Collection|null
-     */
-    protected ?Collection $seo_manager;
-
-    /**
      * SeoComposer constructor.
+     *
+     * @throws ShouldImplementSeoTagInterfaceException
      */
-    public function __construct()
+    public function __construct(protected mixed $seo_manager = null)
     {
         $this->seo_manager = $this->getSeoTags();
     }
@@ -45,10 +41,10 @@ class SeoComposer
     /**
      * Prepare the SEO tags for the view.
      *
-     * @return Collection|null
+     * @return mixed
      * @throws ShouldImplementSeoTagInterfaceException
      */
-    protected function getSeoTags(): ?Collection
+    protected function getSeoTags(): mixed
     {
         $nonPrefixedUrl = request()->path();
 

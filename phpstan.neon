@@ -11,7 +11,7 @@ parameters:
         - '#Instanceof between \*NEVER\* and MichaelRubel\\SeoManager\\Models\\SeoTagContract will always evaluate to false\.#'
         - '#Unreachable statement \- code above always terminates\.#'
         - '#Method MichaelRubel\\SeoManager\\Composers\\SeoComposer\:\:getInstance\(\) is unused\.#'
-        - '#Call to an undefined static method MichaelRubel\\SeoManager\\Models\\SeoTagContract\:\:where\(\)\.#'
+        - '#Call to an undefined static method MichaelRubel\\SeoManager\\Models\\SeoTagContract\:\:firstWhere\(\)\.#'
 
     level: max
 

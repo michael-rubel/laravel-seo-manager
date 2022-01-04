@@ -12,7 +12,8 @@ parameters:
         - '#Unreachable statement \- code above always terminates\.#'
         - '#Method MichaelRubel\\SeoManager\\Composers\\SeoComposer\:\:getInstance\(\) is unused\.#'
         - '#Call to an undefined static method MichaelRubel\\SeoManager\\Models\\SeoTagContract\:\:firstWhere\(\)\.#'
-        - '#Cannot call method reverse\(\) on mixed\.#'
+        - '#Cannot call method toArray\(\) on mixed\.#'
+        - '#Method MichaelRubel\\SeoManager\\Composers\\SeoComposer\:\:getMaxWildcardLevels\(\) is unused\.#'
 
     level: max
 

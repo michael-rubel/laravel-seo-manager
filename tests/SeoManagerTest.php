@@ -4,6 +4,7 @@ namespace MichaelRubel\SeoManager\Tests;
 
 use MichaelRubel\SeoManager\Exceptions\ShouldImplementSeoTagInterfaceException;
 use MichaelRubel\SeoManager\Tests\Stubs\FakeModel;
+use MichaelRubel\SeoManager\Tests\Stubs\TestServiceProvider;
 
 class SeoManagerTest extends TestCase
 {
@@ -32,12 +33,14 @@ class SeoManagerTest extends TestCase
             'url'  => '/test/wildcard/*',
             'tags' => json_decode('{"title":"TestTitle4"}'),
         ]);
+
+        app()->register(TestServiceProvider::class);
     }
 
     /** @test */
     public function testViewHasSeoManagerVariable()
     {
-        $view = $this->view('seo-manager::test-view');
+        $view = $this->view('test-seo-manager::test-view');
 
         $view->assertSee('TestTitle');
     }
@@ -47,7 +50,7 @@ class SeoManagerTest extends TestCase
     {
         $this->mockRequest('/test/second');
 
-        $view = $this->view('seo-manager::test-view');
+        $view = $this->view('test-seo-manager::test-view');
 
         $view->assertSee('TestTitle2');
     }
@@ -57,12 +60,12 @@ class SeoManagerTest extends TestCase
     {
         // entry that exists
         $this->mockRequest('/test/wildcard/third');
-        $view = $this->view('seo-manager::test-view');
+        $view = $this->view('test-seo-manager::test-view');
         $view->assertSee('TestTitle3');
 
         // entry that goes wildcard
         $this->mockRequest('/test/wildcard/fourth');
-        $view = $this->view('seo-manager::test-view');
+        $view = $this->view('test-seo-manager::test-view');
         $this->assertStringContainsString('/test/wildcard/fourth', request()->path());
 
         // this returns the same, since the singleton is bound already
@@ -73,7 +76,7 @@ class SeoManagerTest extends TestCase
     public function testWildcardIsWorking()
     {
         $this->mockRequest('/test/wildcard/fourth');
-        $view = $this->view('seo-manager::test-view');
+        $view = $this->view('test-seo-manager::test-view');
         $view->assertSee('TestTitle4');
     }
 
@@ -82,7 +85,7 @@ class SeoManagerTest extends TestCase
     {
         config(['seo-manager.variable_name' => 'testVariable']);
 
-        $view = $this->view('seo-manager::test-view');
+        $view = $this->view('test-seo-manager::test-view');
 
         $view->assertSee('testVariable');
         $view->assertSee('TestTitle');
@@ -95,6 +98,6 @@ class SeoManagerTest extends TestCase
 
         config(['seo-manager.model' => FakeModel::class]);
 
-        $this->view('seo-manager::test-view');
+        $this->view('test-seo-manager::test-view');
     }
 }

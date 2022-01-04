@@ -22,7 +22,6 @@ class SeoManagerServiceProvider extends PackageServiceProvider
         $package
             ->name('laravel-seo-manager')
             ->hasConfigFile()
-            ->hasViews()
             ->hasViewComposer('*', SeoComposer::class)
             ->hasMigration('create_seo_tags_table');
     }

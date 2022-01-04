@@ -10,14 +10,13 @@
 
 This package provides simple functionality to manage SEO tags in your Laravel application.
 
-Table structure:
 ```php
 seo_tags
 │   ├── url
 │   ├── tags
 ```
 
-You can put the URL available within your app, and the JSON of tags you want to get in the view under the specified path relative to the domain, for example, `/foo/bar`. You can use `*` notation to cover wildcard paths. You will get the manager variable with tags for each view as a `Collection` instance by default. The model to use by the package and variable name is customizable in the config file.
+You can put the URL available within your app, and the JSON of tags you want to get in the view under the specified path relative to the domain, for example, `/foo/bar`. You can use `*` notation to cover the paths as a wildcard. You will get the manager variable with tags for each view as a `Collection` instance by default. The model to use by the package and variable name is customizable in the config file.
 
 The package requires PHP `^8.x` and Laravel `^8.67`.
 

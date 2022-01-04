@@ -46,6 +46,9 @@ Wildcard `*` has a lower priority than basic define.
 ## Roadmap
 - Add Livewire scaffolding.
 
+## Contributing
+If you see the way we can improve the package, you're free to open an issue or pull request.
+
 ## Testing
 ```bash
 composer test

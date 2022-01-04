@@ -2,8 +2,6 @@
 
 namespace MichaelRubel\SeoManager\Composers;
 
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
@@ -45,6 +43,8 @@ class SeoComposer
     }
 
     /**
+     * Prepare the SEO tags for the view.
+     *
      * @return Collection|null
      * @throws ShouldImplementSeoTagInterfaceException
      */
@@ -55,7 +55,7 @@ class SeoComposer
             '/'
         );
 
-        $wildcardUrl = $this->wildcard($url);
+        $wildcardUrls = $this->wildcard($url);
 
         $configuredModel = config('seo-manager.model');
 
@@ -69,38 +69,38 @@ class SeoComposer
             throw new ShouldImplementSeoTagInterfaceException();
         }
 
-        $instance = $this->getInstance($model, $url);
+        $instance = $model::firstWhere($model->getUrlColumnName(), $url);
 
         if (is_null($instance)) {
-            $instance = $this->getInstance($model, $wildcardUrl);
+            $instance = $model::whereIn(
+                $model->getUrlColumnName(),
+                $wildcardUrls
+            )->first();
         }
 
         return $instance?->{$model->getTagsColumnName()};
     }
 
     /**
+     * Make the possible wildcards for the given path.
+     *
      * @param string $url
      *
-     * @return string
+     * @return array
      */
-    protected function wildcard(string $url): string
+    protected function wildcard(string $url): array
     {
-        $array = explode('/', $url);
+        $separated = explode('/', $url);
 
-        array_pop($array);
-        array_push($array, '*');
+        return collect($separated)
+            ->pipe(
+                fn ($parts) => $parts->map(function ($value, $key) use ($parts) {
+                    $wildcard = clone $parts->reject(
+                        fn ($value, $rejection) => $key < $rejection
+                    )->put($key, '*');
 
-        return implode('/', $array);
-    }
-
-    /**
-     * @param SeoTagContract $model
-     * @param string         $url
-     *
-     * @return Model|null
-     */
-    private function getInstance(SeoTagContract $model, string $url): ?Model
-    {
-        return $model::firstWhere($model->getUrlColumnName(), $url);
+                    return $wildcard->implode('/');
+                })
+            )->toArray();
     }
 }

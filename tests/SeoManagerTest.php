@@ -4,6 +4,7 @@ namespace MichaelRubel\SeoManager\Tests;
 
 use MichaelRubel\SeoManager\Exceptions\ShouldImplementSeoTagInterfaceException;
 use MichaelRubel\SeoManager\Tests\Stubs\FakeModel;
+use MichaelRubel\SeoManager\Tests\Stubs\TestModel;
 use MichaelRubel\SeoManager\Tests\Stubs\TestServiceProvider;
 
 class SeoManagerTest extends TestCase
@@ -84,6 +85,19 @@ class SeoManagerTest extends TestCase
 
         // this returns the same, since the singleton is bound already
         $view->assertSee('TestTitle3');
+    }
+
+    /** @test */
+    public function testCanUseOtherTypeOfTags()
+    {
+        config([
+            'seo-manager.variable_name' => 'testVariable',
+            'seo-manager.model'         => TestModel::class,
+        ]);
+
+        $view = $this->view('test-seo-manager::type-view');
+
+        $view->assertSee('TestTitle');
     }
 
     /** @test */

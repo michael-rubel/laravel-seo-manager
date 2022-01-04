@@ -73,7 +73,7 @@ class SeoComposer
 
         if (is_null($instance)) {
             $instance = $model::whereIn($model->getUrlColumnName(), $wildcardUrls)
-                ->take($this->getMaxWildcardLevels())
+                ->limit($this->getMaxWildcardLevels())
                 ->get()
                 ->sortByDesc(
                     fn ($entry) => strlen(

@@ -17,7 +17,7 @@ seo_tags
 │   ├── tags
 ```
 
-You can put the URL available within your app, and the JSON of tags you want to get in the view under the URL specified. You can define wildcard paths using `*` notation to cover the local URL scope. You will receive the manager variable with tags for each view as a `Collection` instance by default. The model to use by the package and variable name is customizable in the config file.
+You can put the URL available within your app, and the JSON of tags you want to get in the view under the URL specified. You can use `*` notation to cover wildcard paths. You will receive the manager variable with tags for each view as a `Collection` instance by default. The model to use by the package and variable name is customizable in the config file.
 
 The package requires PHP `^8.x` and Laravel `^8.67`.
 
@@ -46,7 +46,6 @@ After publishing the config and running migrations, you can apply URLs in the `s
 - `/test-url/*`
 - `/test-url/my-target`
 - `/test-url/any-target/*`
-- `/test-url/any-target/next`
 
 Wildcard `*` has a lower priority than explicit define.
 

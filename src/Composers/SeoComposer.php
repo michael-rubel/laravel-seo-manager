@@ -71,11 +71,11 @@ class SeoComposer
 
         $instance = $this->getInstance($model, $url);
 
-        if (! $instance->exists()) {
+        if (is_null($instance)) {
             $instance = $this->getInstance($model, $wildcardUrl);
         }
 
-        return $instance->first()?->{$model->getTagsColumnName()};
+        return $instance?->{$model->getTagsColumnName()};
     }
 
     /**
@@ -97,10 +97,10 @@ class SeoComposer
      * @param SeoTagContract $model
      * @param string         $url
      *
-     * @return Builder
+     * @return Model|null
      */
-    private function getInstance(SeoTagContract $model, string $url): Builder
+    private function getInstance(SeoTagContract $model, string $url): ?Model
     {
-        return $model::where($model->getUrlColumnName(), $url);
+        return $model::firstWhere($model->getUrlColumnName(), $url);
     }
 }

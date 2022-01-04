@@ -105,7 +105,7 @@ class SeoComposer
 
                     return $wildcard->implode('/');
                 })
-            )->reverse()->toArray();
+            )->toArray();
     }
 
     /**

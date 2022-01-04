@@ -41,6 +41,8 @@ After publishing the config and running migrations, you can apply URLs in the `s
 
 Wildcard `*` has a lower priority than basic define.
 
+- Note: Wildcards are local within the current slash context. This covers most of the use cases. Global wildcards are unavailable, mostly for performance reasons.
+
 ## Roadmap
 - Add Livewire scaffolding.
 

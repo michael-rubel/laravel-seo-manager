@@ -20,8 +20,8 @@ class SeoManagerTest extends TestCase
         ]);
 
         $model::create([
-            'url'  => '/test/second',
-            'tags' => json_decode('{"title":"TestTitle2"}'),
+            'url'  => '/*',
+            'tags' => json_decode('{"title":"TestStar*"}'),
         ]);
 
         $model::create([
@@ -38,7 +38,7 @@ class SeoManagerTest extends TestCase
     }
 
     /** @test */
-    public function testViewHasSeoManagerVariable()
+    public function testSeoManagerIsAvailableForView()
     {
         $view = $this->view('test-seo-manager::test-view');
 
@@ -46,13 +46,19 @@ class SeoManagerTest extends TestCase
     }
 
     /** @test */
-    public function testViewWithMockedUrl()
+    public function testWildcardIsWorkingAndPriorityIsCorrect()
     {
-        $this->mockRequest('/test/second');
-
+        $this->mockRequest('/test/wildcard/fourth');
         $view = $this->view('test-seo-manager::test-view');
+        $view->assertSee('TestTitle4');
+    }
 
-        $view->assertSee('TestTitle2');
+    /** @test */
+    public function testFindsGlobalWildcard()
+    {
+        $this->mockRequest('/foobar');
+        $view = $this->view('test-seo-manager::test-view');
+        $view->assertSee('TestStar*');
     }
 
     /** @test */
@@ -70,14 +76,6 @@ class SeoManagerTest extends TestCase
 
         // this returns the same, since the singleton is bound already
         $view->assertSee('TestTitle3');
-    }
-
-    /** @test */
-    public function testWildcardIsWorking()
-    {
-        $this->mockRequest('/test/wildcard/fourth');
-        $view = $this->view('test-seo-manager::test-view');
-        $view->assertSee('TestTitle4');
     }
 
     /** @test */

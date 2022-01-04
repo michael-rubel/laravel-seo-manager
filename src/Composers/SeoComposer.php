@@ -72,10 +72,14 @@ class SeoComposer
         $instance = $model::firstWhere($model->getUrlColumnName(), $url);
 
         if (is_null($instance)) {
-            $instance = $model::whereIn(
-                $model->getUrlColumnName(),
-                $wildcardUrls
-            )->first();
+            $instance = $model::whereIn($model->getUrlColumnName(), $wildcardUrls)
+                ->take($this->getMaxWildcardLevels())
+                ->get()
+                ->sortByDesc(
+                    fn ($entry) => strlen(
+                        $entry->{$model->getUrlColumnName()}
+                    )
+                )->first();
         }
 
         return $instance?->{$model->getTagsColumnName()};
@@ -101,6 +105,20 @@ class SeoComposer
 
                     return $wildcard->implode('/');
                 })
-            )->toArray();
+            )->reverse()->toArray();
+    }
+
+    /**
+     * Gets the levels to limit the query.
+     *
+     * @return int
+     */
+    private function getMaxWildcardLevels(): int
+    {
+        $levels = config('seo-manager.max_wildcard_levels');
+
+        return is_int($levels)
+            ? $levels
+            : 3;
     }
 }

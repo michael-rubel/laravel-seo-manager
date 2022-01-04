@@ -50,8 +50,10 @@ class SeoComposer
      */
     protected function getSeoTags(): ?Collection
     {
+        $nonPrefixedUrl = request()->path();
+
         $url = Str::start(
-            request()->path(),
+            $nonPrefixedUrl,
             '/'
         );
 
@@ -69,7 +71,9 @@ class SeoComposer
             throw new ShouldImplementSeoTagInterfaceException();
         }
 
-        $instance = $model::firstWhere($model->getUrlColumnName(), $url);
+        $instance = $model::where($model->getUrlColumnName(), $url)
+            ->orWhere($model->getUrlColumnName(), $nonPrefixedUrl)
+            ->first();
 
         if (is_null($instance)) {
             $instance = $model::whereIn($model->getUrlColumnName(), $wildcardUrls)

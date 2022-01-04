@@ -46,6 +46,14 @@ class SeoManagerTest extends TestCase
     }
 
     /** @test */
+    public function testCanGetWithNonPrefixedUrl()
+    {
+        $this->mockRequest('test/wildcard/third');
+        $view = $this->view('test-seo-manager::test-view');
+        $view->assertSee('TestTitle3');
+    }
+
+    /** @test */
     public function testWildcardIsWorkingAndPriorityIsCorrect()
     {
         $this->mockRequest('/test/wildcard/fourth');

@@ -4,9 +4,9 @@ namespace MichaelRubel\SeoManager\Composers;
 
 use Illuminate\Support\Str;
 use Illuminate\View\View;
+use MichaelRubel\SeoManager\Contracts\SeoTagContract;
 use MichaelRubel\SeoManager\Exceptions\ShouldImplementSeoTagInterfaceException;
 use MichaelRubel\SeoManager\Models\SeoTag;
-use MichaelRubel\SeoManager\Models\SeoTagContract;
 
 class SeoComposer
 {

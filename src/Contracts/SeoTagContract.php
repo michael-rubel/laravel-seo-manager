@@ -1,6 +1,6 @@
 <?php
 
-namespace MichaelRubel\SeoManager\Models;
+namespace MichaelRubel\SeoManager\Contracts;
 
 interface SeoTagContract
 {

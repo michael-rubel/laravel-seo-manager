@@ -4,7 +4,7 @@ namespace MichaelRubel\SeoManager\Tests\Stubs;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use MichaelRubel\SeoManager\Models\SeoTagContract;
+use MichaelRubel\SeoManager\Contracts\SeoTagContract;
 
 class TestModel extends Model implements SeoTagContract
 {

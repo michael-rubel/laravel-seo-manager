@@ -8,10 +8,9 @@ parameters:
 
     ignoreErrors:
         - '#Property MichaelRubel\\SeoManager\\Exceptions\\ShouldImplementSeoTagInterfaceException\:\:\$message has no type specified\.#'
-        - '#Instanceof between \*NEVER\* and MichaelRubel\\SeoManager\\Models\\SeoTagContract will always evaluate to false\.#'
+        - '#Instanceof between \*NEVER\* and MichaelRubel\\SeoManager\\Contracts\\SeoTagContract will always evaluate to false\.#'
         - '#Unreachable statement \- code above always terminates\.#'
         - '#Method MichaelRubel\\SeoManager\\Composers\\SeoComposer\:\:getInstance\(\) is unused\.#'
-        - '#Call to an undefined static method MichaelRubel\\SeoManager\\Models\\SeoTagContract\:\:firstWhere\(\)\.#'
         - '#Cannot call method toArray\(\) on mixed\.#'
         - '#Method MichaelRubel\\SeoManager\\Composers\\SeoComposer\:\:getMaxWildcardLevels\(\) is unused\.#'
 

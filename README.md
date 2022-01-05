@@ -42,6 +42,8 @@ After publishing the config and running migrations, you can apply URLs in the `s
 
 Wildcard `*` has a lower priority than explicit define.
 
+- Note: If you're going to override the model to use a different database structure, make sure your model implements [SeoTagContract](https://github.com/michael-rubel/laravel-seo-manager/blob/main/src/Contracts/SeoTagContract.php). The package uses two simple methods to get the database columns.
+
 ## Roadmap
 - Add Livewire scaffolding.
 

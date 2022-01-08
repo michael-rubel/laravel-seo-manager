@@ -72,9 +72,7 @@ class SeoComposer
             ->first();
 
         if (is_null($instance)) {
-            $wildcardUrls = $this->wildcard($url);
-
-            $instance = $model::whereIn($model->getUrlColumnName(), $wildcardUrls)
+            $instance = $model::whereIn($model->getUrlColumnName(), $this->wildcard($url))
                 ->limit($this->getMaxWildcardLevels())
                 ->get()
                 ->sortByDesc(

@@ -48,13 +48,6 @@ class SeoComposer
      */
     protected function getSeoTags(): mixed
     {
-        $nonPrefixedUrl = request()->path();
-
-        $url = Str::start(
-            $nonPrefixedUrl,
-            '/'
-        );
-
         $configuredModel = config('seo-manager.model');
 
         $model = app(
@@ -66,6 +59,9 @@ class SeoComposer
         if (! $model instanceof SeoTagContract) {
             throw new ShouldImplementSeoTagInterfaceException();
         }
+
+        $nonPrefixedUrl = request()->path();
+        $url = Str::start($nonPrefixedUrl, '/');
 
         $instance = $model::where($model->getUrlColumnName(), $url)
             ->orWhere($model->getUrlColumnName(), $nonPrefixedUrl)

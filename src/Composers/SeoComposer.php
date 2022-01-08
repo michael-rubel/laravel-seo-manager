@@ -55,8 +55,6 @@ class SeoComposer
             '/'
         );
 
-        $wildcardUrls = $this->wildcard($url);
-
         $configuredModel = config('seo-manager.model');
 
         $model = app(
@@ -74,6 +72,8 @@ class SeoComposer
             ->first();
 
         if (is_null($instance)) {
+            $wildcardUrls = $this->wildcard($url);
+
             $instance = $model::whereIn($model->getUrlColumnName(), $wildcardUrls)
                 ->limit($this->getMaxWildcardLevels())
                 ->get()

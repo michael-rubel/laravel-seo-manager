@@ -1,6 +1,6 @@
 {
     "name": "michael-rubel/laravel-seo-manager",
-    "description": "Helps to manage your SEO tags.",
+    "description": "Provides simple functionality to manage SEO tags based on URL path within your Laravel application.",
     "keywords": [
         "michael-rubel",
         "laravel",

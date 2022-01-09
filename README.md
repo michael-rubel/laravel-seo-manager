@@ -1,4 +1,4 @@
-![Laravel SEO Manager](https://user-images.githubusercontent.com/37669560/147988859-5d33959e-f43d-4ae6-816a-59c26c17a0ad.png)
+![Laravel SEO Manager](https://user-images.githubusercontent.com/37669560/148681448-a9e56602-5e40-47e0-8fa1-a9477004590f.png)
 
 # Laravel SEO Manager
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/michael-rubel/laravel-seo-manager.svg?style=flat-square&logo=packagist)](https://packagist.org/packages/michael-rubel/laravel-seo-manager)
@@ -8,7 +8,7 @@
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/michael-rubel/laravel-seo-manager/run-tests/main?style=flat-square&label=tests&logo=github)](https://github.com/michael-rubel/laravel-seo-manager/actions)
 [![PHPStan](https://img.shields.io/github/workflow/status/michael-rubel/laravel-seo-manager/phpstan/main?style=flat-square&label=larastan&logo=laravel)](https://github.com/michael-rubel/laravel-seo-manager/actions)
 
-This package provides simple functionality to manage SEO tags in your Laravel application.
+This package provides simple functionality to manage SEO tags based on URL path within your Laravel application.
 
 You can put the URL path available within your app with the JSON of tags you want to get in the view under the specified path. The wildcard `*` notation is available as well. You will get the manager variable with tags for each view as a `Collection` instance by default. The model to use by the package and variable name is customizable in the config file.
 

@@ -13,6 +13,8 @@ parameters:
         - '#Method MichaelRubel\\SeoManager\\Composers\\SeoComposer\:\:getInstance\(\) is unused\.#'
         - '#Cannot call method toArray\(\) on mixed\.#'
         - '#Method MichaelRubel\\SeoManager\\Composers\\SeoComposer\:\:getMaxWildcardLevels\(\) is unused\.#'
+        - '#Parameter \#1 \$class of function call expects object\|string, mixed given\.#'
+        - '#Cannot call method (.*) on mixed\.#'
 
     level: max
 

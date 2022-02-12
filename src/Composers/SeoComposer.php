@@ -6,6 +6,7 @@ namespace MichaelRubel\SeoManager\Composers;
 
 use Illuminate\Support\Str;
 use Illuminate\View\View;
+use MichaelRubel\EnhancedContainer\Call;
 use MichaelRubel\SeoManager\Contracts\SeoTagContract;
 use MichaelRubel\SeoManager\Exceptions\ShouldImplementSeoTagInterfaceException;
 use MichaelRubel\SeoManager\Models\SeoTag;
@@ -48,27 +49,23 @@ class SeoComposer
      */
     protected function getSeoTags(): mixed
     {
-        $configuredModel = config('seo-manager.model');
-
-        $model = app(
-            is_string($configuredModel) && class_exists($configuredModel)
-                ? $configuredModel
-                : SeoTag::class
+        $model = call(
+            config('seo-manager.model', SeoTag::class)
         );
 
-        if (! $model instanceof SeoTagContract) {
+        if (! $model->getInternal(Call::INSTANCE) instanceof SeoTagContract) {
             throw new ShouldImplementSeoTagInterfaceException();
         }
 
         $nonPrefixedUrl = request()->path();
         $url = Str::start($nonPrefixedUrl, '/');
 
-        $instance = $model::where($model->getUrlColumnName(), $url)
+        $instance = $model->where($model->getUrlColumnName(), $url)
             ->orWhere($model->getUrlColumnName(), $nonPrefixedUrl)
             ->first();
 
         if (is_null($instance)) {
-            $instance = $model::whereIn($model->getUrlColumnName(), $this->wildcard($url))
+            $instance = $model->whereIn($model->getUrlColumnName(), $this->wildcard($url))
                 ->limit($this->getMaxWildcardLevels())
                 ->get()
                 ->sortByDesc(
@@ -107,14 +104,10 @@ class SeoComposer
     /**
      * Gets the levels to limit the query.
      *
-     * @return int
+     * @return mixed
      */
-    private function getMaxWildcardLevels(): int
+    private function getMaxWildcardLevels(): mixed
     {
-        $levels = config('seo-manager.max_wildcard_levels');
-
-        return is_int($levels)
-            ? $levels
-            : 3;
+        return config('seo-manager.max_wildcard_levels', 3);
     }
 }

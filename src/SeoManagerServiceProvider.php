@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace MichaelRubel\SeoManager;
 
+use MichaelRubel\EnhancedContainer\LecServiceProvider;
 use MichaelRubel\SeoManager\Composers\SeoComposer;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -33,6 +34,8 @@ class SeoManagerServiceProvider extends PackageServiceProvider
      */
     public function packageRegistered(): void
     {
+        $this->app->register(LecServiceProvider::class);
+
         $this->app->scoped(SeoComposer::class);
     }
 }

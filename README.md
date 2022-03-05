@@ -12,11 +12,7 @@ This package provides simple functionality to manage SEO tags based on URL path 
 
 You can put the URL path available within your app with the JSON of tags you want to get in the view under the specified path. The wildcard `*` notation is available as well. You will get the manager variable with tags for each view as a `Collection` instance by default. The model to use by the package and variable name is customizable in the config file.
 
-The package requires PHP `^8.x` and Laravel `^8.71`.
-
-[![PHP Version](https://img.shields.io/badge/php-^8.x-777BB4?style=flat-square&logo=php)](https://php.net)
-[![Laravel Version](https://img.shields.io/badge/laravel-^8.71-FF2D20?style=flat-square&logo=laravel)](https://laravel.com)
-[![Laravel Octane Compatible](https://img.shields.io/badge/octane-compatible-success?style=flat-square&logo=laravel)](https://github.com/laravel/octane)
+The package requires PHP `^8.x` and Laravel `^8.71` or `^9.0`.
 
 ## Installation
 Install the package using composer:
